@@ -20,15 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //Download Realm Browser from App Store to browse the following
         print(Realm.Configuration.defaultConfiguration.fileURL!)
-        let data = Data()
-        data.name = "Blair"
-        data.age = 99
         
         do {
             let realm = try Realm()
-            try realm.write {
-                realm.add(data)
-            }
         } catch {
             print("Error initialising new realm: \(error)")
         }

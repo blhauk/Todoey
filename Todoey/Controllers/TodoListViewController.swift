@@ -55,7 +55,7 @@ class TodoListViewController: UITableViewController {
         if let item = todoItems?[indexPath.row] {
             do {
                 try realm.write {
-                    // realm.delete(item)
+                    // realm.delete(item) // Simple example of deletion
                     item.done = !item.done
                 }
             } catch {
@@ -84,6 +84,7 @@ class TodoListViewController: UITableViewController {
                     try self.realm.write {
                         let newItem = Item()
                         newItem.title = textField.text!
+                        newItem.dateCreated  = Date()
                         currentCategory.items.append(newItem)
                     }
                 } catch {
@@ -117,8 +118,9 @@ class TodoListViewController: UITableViewController {
 extension TodoListViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        todoItems = todoItems?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "title", ascending: true)
-        tableView.reloadData()
+//        todoItems = todoItems?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "title", ascending: true)
+        todoItems = todoItems?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dateCreated", ascending: true)
+        tableView.reloadData() // Angela deleted this row, but update fails when I comment it out
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

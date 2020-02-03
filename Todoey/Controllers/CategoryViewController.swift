@@ -23,7 +23,6 @@ class CategoryViewController: UITableViewController {
     }
 
     // MARK:  TableView DataSource Methods
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories?.count ?? 1
     }

@@ -12,14 +12,12 @@ import RealmSwift
 class CategoryViewController: SwipeTableViewController {
 
     let realm = try! Realm()
-    
     var categories: Results<Category>?
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadCategories()
-        tableView.rowHeight =  80.0
 
     }
 
@@ -33,9 +31,7 @@ class CategoryViewController: SwipeTableViewController {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         cell.textLabel?.text = categories?[indexPath.row].name ?? "No categories added yet"
-        
-//        cell.delegate = self
-        
+                
         return cell
     }
     
@@ -93,9 +89,7 @@ class CategoryViewController: SwipeTableViewController {
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
         var textField = UITextField()
-        
-        let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
-        
+        let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)        
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             
             let newCategory = Category()

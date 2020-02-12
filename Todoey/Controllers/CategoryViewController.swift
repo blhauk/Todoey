@@ -76,7 +76,10 @@ class CategoryViewController: SwipeTableViewController {
         if let categoryForDeletion = self.categories?[indexPath.row] {
             do {
                 try self.realm.write {
-                    self.realm.delete(categoryForDeletion)
+                    // Added this line to delete children first to prevent orphans
+                    // Removed "self" as it appears that it is not needed
+                    realm.delete(categoryForDeletion.items)
+                    realm.delete(categoryForDeletion)
                 }
             } catch {
                 print("Error deleting category \(error)")
